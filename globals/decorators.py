@@ -1,7 +1,7 @@
-import requests
 from django.shortcuts import redirect
 from .request_manager import Action
 from frontend.settings import MAIN_URL
+from django.http import HttpRequest
 
 def login_required (function) : 
 
@@ -29,3 +29,16 @@ def login_required (function) :
         return func
     
     return wrapper
+
+
+def tenant_config(func) : 
+    def handler(self, request, **kwargs) : 
+        host = request.get_host()
+        kwargs['has_tenant'] = len(host.split('.')) > 1
+        if kwargs['has_tenant'] : 
+            kwargs['tenant'] = {
+                'name' : host.split('.')[0]
+            }
+        f = func(self, request, **kwargs)
+        return f
+    return handler

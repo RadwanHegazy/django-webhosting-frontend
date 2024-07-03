@@ -3,83 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
-    <link rel="stylesheet" href="style/style.css">
+    <title>WebHosting</title>
 </head>
 <body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        :root{
+            --var-primary-color:#8B52E2;
+            --var-font:"Cairo",sans-serif;
+        }
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: var(--var-font);
+            background-color: var(--var-primary-color);
+            gap: 20px;
+        }
+        body h1 {
+            color: #fff;
+            font-family: var(--var-font);
+        }
+        body a {
+            font-family: var(--var-font);
+        }
 
-    <div class="up">
-        <h1>Hello, Username</h1>
-    </div>
+    </style>
     
-    <div class="overlay">
-        <i class="close">X</i>
+    <h1>انشء موقعك الان !</h1>
+    
+    {% if c_user %}
+        <a href="{% url 'profile' %}">الصفحة الشخصية</a>
+    {% else %}
+        <a href="{% url 'login' %}">تسجيل الدخول</a>
+        <a href="{% url 'register' %}">انشاء حساب</a>
+    {% endif %}
 
-        <div class="site-cont">
-
-
-            <div class="site">
-                <a href="#" target="_blank">http://localhost:8000/</a>
-                <span class=""></span>
-                <div class="btns">
-                    <a href="#" class="close_site">اغلاق الموقع</a>
-                    <a href="#">فتح الموقع</a>
-                </div>
-            </div>
-
-            <div class="site">
-                <a href="#" target="_blank">http://localhost:8000/</a>
-                <span class="active"></span>
-                <div class="btns">
-                    <a href="#" class="close_site">اغلاق الموقع</a>
-                    <a href="#">فتح الموقع</a>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
-
-    <div class="cont">
-        <h1>ارفع موقعك الان</h1>
-        <input type="file" id="file" hidden>
-        <div class="upload" id="upload">
-            <p id="filename">اضغط هنا لرفع الموقع</p>
-        </div>
-        <input type="text" placeholder="اسم الموقع">
-        <div class="btns">
-            <button type="button" class="mysites">مواقعي</button>
-            <button type="submit">رفع الموقع</button>
-        </div>
-        <button class="logout">تسجيل الخروج</button>
-    </div>
-
-    <script>
-        var overlay = document.querySelector('.overlay');
-        var close_overlay = overlay.querySelector('i.close');
-        var open_overlay = document.querySelector('.mysites');
-
-        open_overlay.addEventListener('click', function(){
-            overlay.classList.add('view')
-        })
-        
-        close_overlay.addEventListener('click', function(){
-            overlay.classList.remove('view')
-        })
-
-        var filename_element = document.getElementById('filename');
-        var file_field = document.getElementById('file');
-        var choose_file = document.getElementById('upload');
-
-        choose_file.addEventListener('click', ()=>{
-            file_field.click()
-        })
-
-        file_field.addEventListener('change',(e)=>{
-            filename_element.textContent = e.target.files[0].name;
-        })
-
-    </script>
 </body>
 </html>
