@@ -1,22 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول</title>
-    <link rel="stylesheet" href="style/form.css">
+    <link rel="stylesheet" href="{% static 'style/form.css' %}">
 </head>
 <body>
 
-    <div class="container">
+    {% for msg in messages %}
+    <script>alert("{{msg}}")</script>
+    {% endfor %}
+    <form class="container" method="POST">
+        {% csrf_token %}
         <h1>تسجيل الدخول</h1>
-        <input type="email" placeholder="البريد الاكتروني">
-        <input type="password" placeholder="كلمة المرور">
+        <input type="email" name="email" placeholder="البريد الاكتروني">
+        <input type="password" name="password" placeholder="كلمة المرور">
         <div class="btns">
-            <a href="#"> انشاء حساب</a>
-            <button>تسجيل الدخول</button>
+            <a href="{% url 'register' %}"> انشاء حساب</a>
+            <button type="submit">تسجيل الدخول</button>
         </div>
-    </div>
+    </form>
     
 </body>
 </html>

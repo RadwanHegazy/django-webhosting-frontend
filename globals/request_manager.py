@@ -17,7 +17,9 @@ class Action :
         
     def get (self) :
         self.req = requests.get(self.url,data=self.data,headers=self.headers,files=self.files)
-        
+    
+    def patch(self):
+        self.req = requests.patch(self.url,data=self.data,headers=self.headers,files=self.files)
 
     @property
     def is_valid (self) : 
